@@ -1,10 +1,11 @@
+require('dotenv').config();
+
 const express = require('express');
 const app = express();
 
 const mongoose = require("mongoose");
 app.use(express.json());
-mongoose.connect("mongodb://localhost:27017/Vinted");
-
+mongoose.connect(process.env.MONGODB_URI);
 const userRoutes = require("./routes/user");
 app.use(userRoutes);
 const offerRoutes = require("./routes/offer");
@@ -16,6 +17,6 @@ app.all("*", (req,res)=>{
     res.status(404).json({message: "Not found"});
 })
 
-app.listen(3000, (req,res)=>{
+app.listen(process.env.PORT, (req,res)=>{
   console.log("Server has started");
 } );
