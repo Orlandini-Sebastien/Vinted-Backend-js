@@ -7,7 +7,7 @@ const Offer = require( "../models/Offer");
 const isAuthenticated = require("../middlewars/isAuthenticated");
 
 cloudinary.config({
-  cloud_name: process.env.COUD_NAME,
+  cloud_name: process.env.CLOUD_NAME,
   api_key: process.env.API_KEY,
   api_secret: process.env.API_SECRET
 });
