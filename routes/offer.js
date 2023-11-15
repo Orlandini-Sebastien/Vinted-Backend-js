@@ -55,7 +55,7 @@ router.post("/offer/publish", isAuthenticated , fileUpload(), async(req,res)=>{
           }
       );
 
-      newOffer.product_image = uploadResult;
+      newOffer.product_image = uploadResult.secure_url;
       await newOffer.save();
 
       res.status(201).json(newOffer);
