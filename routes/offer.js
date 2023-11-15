@@ -20,8 +20,6 @@ router.post("/offer/publish", isAuthenticated , fileUpload(), async(req,res)=>{
     try {
       const { name, description, price, brand, size, condition, color, city} = req.body;
 
-      console.log(description);
-
       // Create new Offer
       const newOffer = new Offer({
           product_name: name,
@@ -54,9 +52,8 @@ router.post("/offer/publish", isAuthenticated , fileUpload(), async(req,res)=>{
           convertedPicture,
           {
             folder: `/vinted/offers/${newOffer._id}`
-          },
-          function(error, result) { console.log(result, error); 
-      });
+          }
+      );
 
       newOffer.product_image = uploadResult;
       await newOffer.save();
