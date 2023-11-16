@@ -38,9 +38,12 @@ router.post("/user/signup", async(req,res)=>{
           });
 
         await newUser.save();
-        res.status(200).json({"_id":newUser._id,
-                            "token" : newUser.token,
-                            "username" : newUser.account.username });
+        
+        res.status(200).json({
+            "_id":newUser._id,
+            "token" : newUser.token,
+            "username" : newUser.account.username 
+        });
     } catch (error) {
         res.status(500).json({message : error.message});
     }
@@ -52,15 +55,17 @@ router.post("/user/login", async(req,res)=>{
         const password = req.body.password;
         const user = await User.findOne({email : email});
         if(!user){
-                return res.status(401).json({message : "Email dosn't exist"});
-            }
+            return res.status(401).json({message : "Email dosn't exist"});
+        }
 
         const salt = user.salt;
         const hash = SHA256(password + salt).toString(encBase64);
         if(hash === user.hash){
-           res.status(400).json({"_id" : user._id,
-                                "token": user.token,
-                                "username" : user.account.username }); 
+           res.status(400).json({
+            "_id" : user._id,
+            "token": user.token,
+            "username" : user.account.username 
+            }); 
         } else {
             res.status(401).json({message : "Password do not match"})
         }

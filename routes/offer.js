@@ -13,49 +13,48 @@ cloudinary.config({
 });
 
 const convertToBase64 = (file) => {
-    return `data:${file.mimetype};base64,${file.data.toString("base64")}`;
-  };
+  return `data:${file.mimetype};base64,${file.data.toString("base64")}`;
+};
 
 router.post("/offer/publish", isAuthenticated , fileUpload(), async(req,res)=>{
   try {
     const { name, description, price, brand, size, condition, color, city} = req.body;
-      // Create new Offer
-      const newOffer = new Offer({
-          product_name: name,
-          product_description: description,
-          product_price: price,
-          product_details: [
-            {MARQUE: brand },
-            {TAILLE: size},
-            {ÉTAT: condition},
-            {COULEUR: color},
-            {EMPLACEMENT: city}],
-          owner: req.user,
-      });
-      await newOffer.save();
+    // Create new Offer
+    const newOffer = new Offer({
+        product_name: name,
+        product_description: description,
+        product_price: price,
+        product_details: [
+          {MARQUE: brand },
+          {TAILLE: size},
+          {ÉTAT: condition},
+          {COULEUR: color},
+          {EMPLACEMENT: city}],
+        owner: req.user,
+    });
+    await newOffer.save();
 
-      // Upload the picture to the request
-      const convertedPicture = convertToBase64(req.files.image);
-      const uploadResult = await cloudinary.uploader.upload(
-          convertedPicture,
-          {folder: `/vinted/offers/${newOffer._id}`},
-          function(error, result) { console.log(result, error);}
-      );
+    // Upload the picture to the request
+    const convertedPicture = convertToBase64(req.files.image);
+    const uploadResult = await cloudinary.uploader.upload(
+        convertedPicture,
+        {folder: `/vinted/offers/${newOffer._id}`},
+        function(error, result) { console.log(result, error);}
+    );
       
-      // Save only the secure_url of the picture in cloudinary
-      newOffer.product_image = uploadResult.secure_url;
-      await newOffer.save();
+    // Save only the secure_url of the picture in cloudinary
+    newOffer.product_image = uploadResult.secure_url;
+    await newOffer.save();
       
-      //Show the newOffer
-      res.status(201).json(newOffer);
+    //Show the newOffer
+    res.status(201).json(newOffer);
     } catch (error) {
-        res.status(500).json({message : error.message});
+      res.status(500).json({message : error.message});
     }
 });
 
 router.put("/offer/modify", isAuthenticated, fileUpload(), async(req,res)=>{
   try {
-    // Find with id
     const {product_name, product_description, product_price, product_id} = req.body;
 
     // Can modify if this is the owner of the offer
@@ -69,7 +68,7 @@ router.put("/offer/modify", isAuthenticated, fileUpload(), async(req,res)=>{
     offer.product_description = product_description;
     offer.product_price = product_price;
 
-    // Delate old picture 
+    // Delete old picture 
     const httpsSplit = offer.product_image.split("/");
     const endOfhttps = httpsSplit[httpsSplit.length-1].split(".");
     const imageToDelete = "vinted/offers/"+product_id+"/"+endOfhttps[0];
@@ -104,14 +103,14 @@ router.delete("/offer/delete/:id", async(req,res)=>{
 
 router.get("/offer/:id", async(req,res)=>{
   try {
-      const id = req.params.id;
-      const product = await Offer.findById(id);
-      if(!product){
-       return  res.status(404).json({message : "Not found"});
-      }
-      res.status(200).json(product);
+    const id = req.params.id;
+    const product = await Offer.findById(id);
+    if(!product){
+      return  res.status(404).json({message : "Not found"});
+    }
+    res.status(200).json(product);
   } catch (error) {
-      res.status(500).json({message : error.message});
+    res.status(500).json({message : error.message});
   }
 })
 
