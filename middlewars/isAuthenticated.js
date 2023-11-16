@@ -6,12 +6,12 @@ const isAuthenticated = async(req,res,next)=>{
     token: req.headers.authorization.replace("Bearer ", "")
   });
     if (!user) {
-        return res.status(401).json({ error: "Unauthorized" });
+        return res.status(401).json({ error: "Unauthorized ✋" });
     }
     req.user=user;
     return next();
   } catch (error) {
-    return res.status(401).json({ error: "Unauthorized" });
+    return res.status(401).json({ error: "Unauthorized ✋" });
   }
 }
 

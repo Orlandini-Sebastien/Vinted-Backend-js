@@ -16,9 +16,9 @@ const offersRoutes = require("./routes/offers");
 app.use(offersRoutes);
 
 app.all("*", (req,res)=>{
-    res.status(404).json({message: "Not found"});
+    res.status(404).json({message: "😞 Not found 😞"});
 })
 
 app.listen(process.env.PORT, (req,res)=>{
-  console.log("Server has started");
+  console.log("🚀🚀 Server has started 🚀🚀");
 } );

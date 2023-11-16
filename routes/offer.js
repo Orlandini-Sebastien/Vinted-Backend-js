@@ -17,64 +17,51 @@ const convertToBase64 = (file) => {
   };
 
 router.post("/offer/publish", isAuthenticated , fileUpload(), async(req,res)=>{
-    try {
-      const { name, description, price, brand, size, condition, color, city} = req.body;
-
+  try {
+    const { name, description, price, brand, size, condition, color, city} = req.body;
       // Create new Offer
       const newOffer = new Offer({
           product_name: name,
           product_description: description,
           product_price: price,
           product_details: [
-            {
-              MARQUE: brand ,
-            },
-            {
-              TAILLE: size,
-            },
-            {
-              ÉTAT: condition,
-            },
-            {
-              COULEUR: color,
-            },
-            {
-              EMPLACEMENT: city,
-            }
-          ],
+            {MARQUE: brand },
+            {TAILLE: size},
+            {ÉTAT: condition},
+            {COULEUR: color},
+            {EMPLACEMENT: city}],
           owner: req.user,
-        });
+      });
       await newOffer.save();
 
-      // Picture with bonus in folder
+      // Upload the picture to the request
       const convertedPicture = convertToBase64(req.files.image);
       const uploadResult = await cloudinary.uploader.upload(
           convertedPicture,
-          {
-            folder: `/vinted/offers/${newOffer._id}`
-          }
+          {folder: `/vinted/offers/${newOffer._id}`},
+          function(error, result) { console.log(result, error);}
       );
-
+      
+      // Save only the secure_url of the picture in cloudinary
       newOffer.product_image = uploadResult.secure_url;
       await newOffer.save();
-
+      
+      //Show the newOffer
       res.status(201).json(newOffer);
     } catch (error) {
         res.status(500).json({message : error.message});
     }
 });
 
-
 router.put("/offer/modify", isAuthenticated, fileUpload(), async(req,res)=>{
   try {
-    // 1 retrouver l'annonce avec l'id
-
+    // Find with id
     const {product_name, product_description, product_price, product_id} = req.body;
 
-    // Si c'est le bon owner, on peut modifier
+    // Can modify if this is the owner of the offer
     const offer = await Offer.findById(product_id);
     if(!offer.owner.equals(req.user._id)){
-      return res.status(401).json({message : "You can't modify"});
+      return res.status(401).json({message : "You can't modify ✋"});
     }
 
     // Modify text 
@@ -82,18 +69,18 @@ router.put("/offer/modify", isAuthenticated, fileUpload(), async(req,res)=>{
     offer.product_description = product_description;
     offer.product_price = product_price;
 
-    // Delate old picture don't work
-    await cloudinary.uploader.destroy(offer.product_image.public_id);
+    // Delate old picture 
+    const httpsSplit = offer.product_image.split("/");
+    const endOfhttps = httpsSplit[httpsSplit.length-1].split(".");
+    const imageToDelete = "vinted/offers/"+product_id+"/"+endOfhttps[0];
+    await cloudinary.uploader.destroy(imageToDelete);
 
     //Save new picture
-    
     const newConvertedPicture = convertToBase64(req.files.product_image);
     const inCloudinary = await cloudinary.uploader.upload(
       newConvertedPicture,
-      {
-        folder: `/vinted/offers/${product_id}`
-      },
-      function(error, result) { console.log(result, error); });
+      {folder: `/vinted/offers/${product_id}`}
+    );
 
     offer.product_image = inCloudinary.secure_url;
     await offer.save();
