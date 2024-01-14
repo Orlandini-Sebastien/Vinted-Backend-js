@@ -15,6 +15,9 @@ app.use(offerRoutes);
 const offersRoutes = require("./routes/offers");
 app.use(offersRoutes);
 
+const deliverooRoutes = require("./routes/deliveroo");
+app.use(deliverooRoutes);
+
 app.all("*", (req,res)=>{
     res.status(404).json({message: "😞 Not found 😞"});
 })
