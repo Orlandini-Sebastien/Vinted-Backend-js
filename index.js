@@ -12,11 +12,15 @@ const userRoutes = require("./routes/user");
 app.use(userRoutes);
 const offerRoutes = require("./routes/offer");
 app.use(offerRoutes);
+
 const offersRoutes = require("./routes/offers");
 app.use(offersRoutes);
 
 const deliverooRoutes = require("./routes/deliveroo");
 app.use(deliverooRoutes);
+
+const deliverooBackRoutes = require("./routes/deliveroo-back");
+app.use(deliverooBackRoutes);
 
 app.all("*", (req,res)=>{
     res.status(404).json({message: "😞 Not found 😞"});
