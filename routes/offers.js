@@ -32,7 +32,7 @@ router.get("/offers", async(req,res)=>{
         } else {
             offers = await Offer.find().sort(obj).limit(page*limit).skip((page-1)*limit).populate("owner", { account: 1 });
 
-                
+        }
              
         res.status(200).json(offers);
     } catch (error) {
