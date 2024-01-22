@@ -28,15 +28,12 @@ router.get("/offers", async(req,res)=>{
                 filters.product_price = {};
                 filters.product_price.$gte = priceMin;}
             if(product_name) filters.product_name =  new RegExp(product_name, "i") ;
-            offers = await Offer.find(filters).sort(obj).limit(page*limit).skip((page-1)*limit).populate( {
-                path: "owner",
-                select: { account: 1 }
-             });
+            offers = await Offer.find(filters).sort(obj).limit(page*limit).skip((page-1)*limit).populate("owner", { account: 1 });
         } else {
-            offers = await Offer.find().sort(obj).limit(page*limit).skip((page-1)*limit).populate( {
-                path: "owner",
-                select: { account: 1 }
-             });
+            offers = await Offer.find().sort(obj).limit(page*limit).skip((page-1)*limit).populate("owner", { account: 1 });
+
+                
+             
         res.status(200).json(offers);
     } catch (error) {
         res.status(500).json({message : error.message});
