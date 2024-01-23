@@ -94,7 +94,7 @@ router.post("/user/login", async(req,res)=>{
            res.status(400).json({
             "_id" : user._id,
             "token": user.token,
-            "username" : user.account.username 
+            "account" : user.account
             }); 
         } else {
             res.status(401).json({message : "Password do not match"})
