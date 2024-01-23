@@ -7,7 +7,7 @@ router.get("/offers", async(req,res)=>{
     try {
         const filters = {};
         let offers={};
-        const limit =5;
+        const limit =40;
 
         // Condition in limit() and skip()
         let page = Number(req.query.page);
