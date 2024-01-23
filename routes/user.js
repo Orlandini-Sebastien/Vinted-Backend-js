@@ -5,11 +5,11 @@ const SHA256 = require("crypto-js/sha256");
 const encBase64 = require("crypto-js/enc-base64");
 const uid2 = require("uid2");
 
-        const fileUpload = require("express-fileupload");
-        const convertToBase64 = require("../utils/convertToBase64")
-        const cloudinary = require("cloudinary").v2;
-        
-router.post("/user/signup", async(req,res)=>{
+const fileUpload = require("express-fileupload");
+const convertToBase64 = require("../utils/convertToBase64")
+const cloudinary = require("cloudinary").v2;
+
+router.post("/user/signup", fileUpload(), async(req,res)=>{
     try {
         const username = req.body.username;
         const email = req.body.email;
