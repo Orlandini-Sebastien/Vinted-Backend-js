@@ -11,6 +11,11 @@ router.post("/user/signup", async(req,res)=>{
         const email = req.body.email;
         const password = req.body.password;
         const newsletter = req.body.newsletter;
+
+
+        const fileUpload = require("express-fileupload");
+        const convertToBase64 = require("../utils/convertToBase64")
+        const cloudinary = require("cloudinary").v2;
        
         if(username === undefined){
             return res.status(400).json({message: "Users must enter a username"});
@@ -37,12 +42,21 @@ router.post("/user/signup", async(req,res)=>{
             salt: salt,
           });
 
+        // With avatar
+        if(req.files?.avatar) {
+            const result =await cloudinary.upload(convertToBase64(req.files.avatar), {
+                folder: `/vinted/users/${newUser._id}`,
+                public_id: "avatar",
+              } );
+              newUser.account.avatar = result;
+        }
+
         await newUser.save();
         
         res.status(200).json({
             "_id":newUser._id,
             "token" : newUser.token,
-            "username" : newUser.account.username 
+            "account" : newUser.account
         });
     } catch (error) {
         res.status(500).json({message : error.message});
