@@ -6,7 +6,7 @@ const encBase64 = require("crypto-js/enc-base64");
 const uid2 = require("uid2");
 
 const fileUpload = require("express-fileupload");
-const convertToBase64 = require("../utils/convertToBase64")
+
 const cloudinary = require("cloudinary").v2;
 
 cloudinary.config({
@@ -14,6 +14,10 @@ cloudinary.config({
     api_key: process.env.API_KEY,
     api_secret: process.env.API_SECRET
   });
+
+const convertToBase64 = (file) => {
+return `data:${file.mimetype};base64,${file.data.toString("base64")}`;
+};
 
 router.post("/user/signup", fileUpload(), async(req,res)=>{
     try {
