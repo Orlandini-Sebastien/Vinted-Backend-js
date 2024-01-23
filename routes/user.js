@@ -54,13 +54,23 @@ router.post("/user/signup", fileUpload(), async(req,res)=>{
             salt: salt,
           });
 
+
+ 
+
+
+
         // With avatar
         if(req.files?.avatar) {
-            const result =await cloudinary.upload(convertToBase64(req.files.avatar), {
-                folder: `/vinted/users/${newUser._id}`,
-                public_id: "avatar",
-              } );
-              newUser.account.avatar = result;
+              // Upload the picture to the request
+        const convertedPicture = convertToBase64(req.files.avatar);
+        const uploadResult = await cloudinary.uploader.upload(
+            convertedPicture,
+            {folder: `/vinted/users/${newUser._id}`},
+            function(error, result) { console.log(result, error);}
+        );
+        
+        // Save only the secure_url of the picture in cloudinary
+        newOffer.account.avatar = uploadResult;
         }
 
         await newUser.save();
