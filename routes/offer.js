@@ -105,7 +105,7 @@ router.delete("/offer/delete/:id", async(req,res)=>{
 router.get("/offer/:id", async(req,res)=>{
   try {
     const id = req.params.id;
-    const product = await Offer.findById(id);
+    const product = await Offer.findById(id).populate("owner" , { account: 1 });;
     if(!product){
       return  res.status(404).json({message : "Not found"});
     }
