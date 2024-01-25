@@ -91,7 +91,7 @@ router.post("/user/login", async(req,res)=>{
         const salt = user.salt;
         const hash = SHA256(password + salt).toString(encBase64);
         if(hash === user.hash){
-           res.status(400).json({
+           res.status(200).json({
             "_id" : user._id,
             "token": user.token,
             "account" : user.account
