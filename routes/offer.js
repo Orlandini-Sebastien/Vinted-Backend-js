@@ -21,9 +21,7 @@ router.post("/offer/publish", isAuthenticated , fileUpload(), async(req,res)=>{
   try {
     const { name , description, price, brand, size, condition, color, city} = req.body;
 
-    if(name === "" && description === "" && price === "" && city === ""){
-      return res.status(200).json({message : "authorize"});
-    }
+ 
 
     // Create new Offer
     const newOffer = new Offer({
