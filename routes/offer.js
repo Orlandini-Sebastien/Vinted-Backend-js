@@ -22,7 +22,7 @@ router.post("/offer/publish", isAuthenticated , fileUpload(), async(req,res)=>{
     const { name , description, price, brand, size, condition, color, city} = req.body;
 
     console.log("name >>>",name);
-    if(name === "" && description === "" && price === "" && city === ""){
+    if(name === undefined && description === undefined && price === undefined && city === undefined){
        return res.status(200).json({message : "authorize"});
     }
 
