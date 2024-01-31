@@ -30,7 +30,7 @@ router.post("/offer/publish", isAuthenticated , fileUpload(), async(req,res)=>{
     const newOffer = new Offer({
         product_name: name,
         product_description: description,
-        product_price: price,
+        product_price: Number(price),
         product_details: [
           {MARQUE: brand },
           {TAILLE: size},
