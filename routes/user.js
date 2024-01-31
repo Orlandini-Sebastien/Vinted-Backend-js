@@ -26,13 +26,7 @@ router.post("/user/signup", fileUpload(), async(req,res)=>{
         const password = req.body.password;
         const newsletter = req.body.newsletter;
 
-
-
-       
-        if(username === undefined){
-            return res.status(400).json({message: "Users must enter a username"});
-        }
-
+   
         const salt = uid2(16);
         const hash = SHA256(password + salt).toString(encBase64);
         const token = uid2(16);

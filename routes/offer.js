@@ -19,7 +19,12 @@ const convertToBase64 = (file) => {
 
 router.post("/offer/publish", isAuthenticated , fileUpload(), async(req,res)=>{
   try {
-    const { name, description, price, brand, size, condition, color, city} = req.body;
+    const { name , description, price, brand, size, condition, color, city} = req.body;
+
+    if(name === '' && description === '' && price === '' && city === ''){
+      res.status(201).json({message : "authorize"});
+    }
+
     // Create new Offer
     const newOffer = new Offer({
         product_name: name,
