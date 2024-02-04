@@ -2,7 +2,7 @@
 const express = require('express');
 const cors = require("cors");
 
-/*
+
 const creatStripe = require ("stripe")
 const stripe = createStripe(process.env.SRIPE_SECRET_KEY)
 
@@ -12,7 +12,7 @@ app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
   res.setHeader('Access-Control-Allow-Credentials', true);
   next();
-  });*/
+  });
 
 const app = express();
 app.use(express.json());
@@ -31,7 +31,7 @@ app.use(offerRoutes);
 const offersRoutes = require("./routes/offers");
 app.use(offersRoutes);
 
-/*
+
 app.post("/payment", async (req, res) => {
   // Réception du token créer via l'API Stripe depuis le Frontend
   const stripeToken = req.body.stripeToken;
@@ -50,7 +50,7 @@ app.post("/payment", async (req, res) => {
 
   res.json(response);
 });
-*/
+
 
 
 
