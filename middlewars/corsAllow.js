@@ -1,3 +1,6 @@
+const cors = require("cors");
+app.use(cors());
+
 const corsAllow = (req, res, next) => {
 
     // Website you wish to allow to connect
