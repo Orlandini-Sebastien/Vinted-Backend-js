@@ -6,6 +6,7 @@ const cors = require("cors");
 app.use(cors());
 
 router.get("/offers", async(req,res)=>{
+    res.setHeader('Access-Control-Allow-Origin', '*');
     try {
         const filters = {};
         let offers={};
