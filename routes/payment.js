@@ -1,6 +1,9 @@
 const stripe = require("stripe")(process.env.SRIPE_SECRET_KEY);
 const isAuthenticated = require("../middlewars/isAuthenticated");
-
+const app = express();
+const cors = require("cors");
+app.use(cors());
+app.use(express.json());
 const express = require("express");
 const router = express.Router();
 
