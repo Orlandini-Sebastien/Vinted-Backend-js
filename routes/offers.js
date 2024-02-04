@@ -4,8 +4,8 @@ const Offer = require( "../models/Offer");
 
 const corsAllow = require ("../middlewars/corsAllow")
 
-router.get("/offers", corsAllow, async(req,res)=>{
- 
+router.get("/offers", corsAllow(), async(req,res)=>{
+  res.setHeader("Acces-Control-Allow-Origin", "*");
     try {
         const filters = {};
         let offers={};

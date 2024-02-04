@@ -1,11 +1,13 @@
-const stripe = require("stripe")(process.env.SRIPE_SECRET_KEY);
-const isAuthenticated = require("../middlewars/isAuthenticated");
-const app = express();
-const cors = require("cors");
-app.use(cors());
-app.use(express.json());
 const express = require("express");
+const cors = require("cors");
+const stripe = require("stripe")(process.env.SRIPE_SECRET_KEY);
+const app = express();
+const isAuthenticated = require("../middlewars/isAuthenticated");
 const router = express.Router();
+app.use(express.json());
+app.use(cors());
+
+
 
 router.post("/payment", isAuthenticated ,  async(req,res) => {
     const stripeToken = req.body.stripeToken;
