@@ -4,7 +4,7 @@ const cors = require("cors");
 
 
 const creatStripe = require ("stripe")
-const stripe = createStripe(process.env.SRIPE_SECRET_KEY)
+const stripe = creatStripe(process.env.SRIPE_SECRET_KEY)
 
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', 'https://thriving-medovik-6bc46e.netlify.app');
