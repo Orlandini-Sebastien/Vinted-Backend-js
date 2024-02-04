@@ -20,3 +20,4 @@ router.post("/payment", isAuthenticated ,  async(req,res) => {
       res.json(response.status)
 })
 
+module.exports= router;
