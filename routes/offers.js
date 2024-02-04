@@ -7,8 +7,8 @@ const corsAllow = require ("../middlewars/corsAllow")
 const cors = require("cors");
 app.use(cors());
 
-router.get("/offers", corsAllow(), async(req,res)=>{
-  res.setHeader("Acces-Control-Allow-Origin", "*");
+router.get("/offers", corsAllow(),corsAllow, async(req,res)=>{
+
     try {
         const filters = {};
         let offers={};
