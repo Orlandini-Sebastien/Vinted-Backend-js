@@ -16,7 +16,7 @@ app.use(function (req, res, next) {
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(cors({origin: 'https://thriving-medovik-6bc46e.netlify.app'}));
 require('dotenv').config();
 
 const mongoose = require("mongoose");
