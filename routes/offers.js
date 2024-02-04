@@ -2,12 +2,9 @@ const express = require("express");
 const router = express.Router();
 const Offer = require( "../models/Offer");
 
-const cors = require("cors");
-app.use(cors());
-
 const corsAllow = require ("../middlewars/corsAllow")
 
-router.get("/offers", corsAllow(), async(req,res)=>{
+router.get("/offers", corsAllow, async(req,res)=>{
  
     try {
         const filters = {};
