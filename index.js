@@ -2,8 +2,10 @@ require('dotenv').config();
 
 const express = require('express');
 const cors = require("cors");
+
 const app = express();
 app.use(cors());
+
 
 const mongoose = require("mongoose");
 app.use(express.json());
@@ -15,6 +17,9 @@ app.use(offerRoutes);
 
 const offersRoutes = require("./routes/offers");
 app.use(offersRoutes);
+
+const paymentRoutes = require("./routes/payment");
+app.use(paymentRoutes);
 
 const deliverooRoutes = require("./routes/deliveroo");
 app.use(deliverooRoutes);
