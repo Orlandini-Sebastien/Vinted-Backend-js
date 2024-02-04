@@ -5,7 +5,7 @@ const cors = require("cors");
 
 const stripe  = require ("stripe")(process.env.SRIPE_SECRET_KEY)
 
-
+const isAuthenticated = require("./middlewars/isAuthenticated");
 
 const app = express();
 app.use(express.json());
@@ -25,7 +25,7 @@ const offersRoutes = require("./routes/offers");
 app.use(offersRoutes);
 
 
-app.post("/payment", async (req, res) => {
+app.post("/payment", isAuthenticated, async (req, res) => {
 
   // Réception du token créer via l'API Stripe depuis le Frontend
   const stripeToken = req.body.stripeToken;
