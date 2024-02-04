@@ -33,6 +33,7 @@ app.use(offersRoutes);
 
 
 app.post("/payment", async (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://thriving-medovik-6bc46e.netlify.app');
   // Réception du token créer via l'API Stripe depuis le Frontend
   const stripeToken = req.body.stripeToken;
   // Créer la transaction

@@ -3,7 +3,7 @@ const router = express.Router();
 const Offer = require( "../models/Offer");
 
 router.get("/offers", async(req,res)=>{
-
+    res.setHeader('Access-Control-Allow-Origin', 'https://thriving-medovik-6bc46e.netlify.app');
     try {
         const filters = {};
         let offers={};
