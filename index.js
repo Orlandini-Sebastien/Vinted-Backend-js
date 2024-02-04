@@ -18,10 +18,6 @@ app.use(offerRoutes);
 const offersRoutes = require("./routes/offers");
 app.use(offersRoutes);
 
-const paymentRoutes = require("./routes/payment");
-app.use(paymentRoutes);
-
-
 const deliverooRoutes = require("./routes/deliveroo");
 app.use(deliverooRoutes);
 
