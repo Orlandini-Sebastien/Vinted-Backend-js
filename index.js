@@ -2,18 +2,11 @@
 const express = require('express');
 const cors = require("cors");
 
-/*
-const creatStripe = require ("stripe")
-const stripe = creatStripe(process.env.SRIPE_SECRET_KEY)
 
-app.use(function (req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', 'https://thriving-medovik-6bc46e.netlify.app');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-  res.setHeader('Access-Control-Allow-Credentials', true);
-  next();
-  });
-*/
+const stripe  = require ("stripe")(process.env.SRIPE_SECRET_KEY)
+
+
+
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -31,9 +24,9 @@ app.use(offerRoutes);
 const offersRoutes = require("./routes/offers");
 app.use(offersRoutes);
 
-/*
+
 app.post("/payment", async (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://thriving-medovik-6bc46e.netlify.app');
+
   // Réception du token créer via l'API Stripe depuis le Frontend
   const stripeToken = req.body.stripeToken;
   // Créer la transaction
@@ -52,7 +45,7 @@ app.post("/payment", async (req, res) => {
   res.json(response);
 });
 
-*/
+
 
 
 const deliverooRoutes = require("./routes/deliveroo");
