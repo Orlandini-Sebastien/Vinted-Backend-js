@@ -4,7 +4,7 @@ const express = require('express');
 const cors = require("cors");
 
 const app = express();
-app.use(cors({origin: 'https://thriving-medovik-6bc46e.netlify.app/'}));
+app.use(cors());
 
 
 const mongoose = require("mongoose");
