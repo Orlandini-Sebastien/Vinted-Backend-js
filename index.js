@@ -9,14 +9,12 @@ require('dotenv').config();
 const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGODB_URI);
 
-
+// For Vinted payment
 const corsOptions = {
-  origin: 'https://thriving-medovik-6bc46e.netlify.app/',
-
-  
+  origin: 'https://thriving-medovik-6bc46e.netlify.app',
 }
-
 app.use(cors(corsOptions));
+
 
 const userRoutes = require("./routes/user");
 app.use(userRoutes);
