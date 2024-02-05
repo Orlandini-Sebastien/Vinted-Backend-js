@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 
 const stripe  = require ("stripe")(process.env.SRIPE_SECRET_KEY)
-
 const isAuthenticated = require("../middlewars/isAuthenticated");
 
 
