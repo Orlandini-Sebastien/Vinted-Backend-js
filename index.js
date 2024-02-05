@@ -12,9 +12,10 @@ mongoose.connect(process.env.MONGODB_URI);
 // For Vinted payment
 const corsOptions = {
   origin: 'https://thriving-medovik-6bc46e.netlify.app',
+  optionsSuccessStatus: 200
 }
 app.use(cors(corsOptions));
-
+app.options('*', cors());
 
 const userRoutes = require("./routes/user");
 app.use(userRoutes);
