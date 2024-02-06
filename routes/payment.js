@@ -13,6 +13,10 @@ router.post("/payment", isAuthenticated,  async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', "https://thriving-medovik-6bc46e.netlify.app");
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Origin', "https://thriving-medovik-6bc46e.netlify.app");
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     const stripeToken = req.body.stripeToken;
     const response = await stripe.charges.create({
       amount: 2000,
