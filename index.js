@@ -11,7 +11,7 @@ mongoose.connect(process.env.MONGODB_URI);
 
 
 const corsOptions = {
-  "origin": "https://thriving-medovik-6bc46e.netlify.app/",
+  "origin": "https://thriving-medovik-6bc46e.netlify.app",
   "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
   "preflightContinue": true,
   "optionsSuccessStatus": 204,
