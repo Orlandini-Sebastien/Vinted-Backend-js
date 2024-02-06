@@ -10,7 +10,6 @@ const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGODB_URI);
 
 
-
 const corsOptions = {
   "origin": "https://thriving-medovik-6bc46e.netlify.app/",
   "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
@@ -21,7 +20,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-app.use(cors());
+
 
 const userRoutes = require("./routes/user");
 app.use(userRoutes);
