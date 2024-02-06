@@ -8,6 +8,7 @@ const isAuthenticated = require("../middlewars/isAuthenticated");
  
 
 router.post("/payment", isAuthenticated,  async (req, res) => {
+  res.set('Access-Control-Allow-Origin', '*');
     const stripeToken = req.body.stripeToken;
     const response = await stripe.charges.create({
       amount: 2000,
