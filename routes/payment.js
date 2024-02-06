@@ -8,7 +8,11 @@ const isAuthenticated = require("../middlewars/isAuthenticated");
  
 
 router.post("/payment", isAuthenticated,  async (req, res) => {
-  res.set('Access-Control-Allow-Origin', '*');
+  res.set('Access-Control-Allow-Origin', "https://thriving-medovik-6bc46e.netlify.app");
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  res.setHeader('Access-Control-Allow-Origin', "https://thriving-medovik-6bc46e.netlify.app");
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
     const stripeToken = req.body.stripeToken;
     const response = await stripe.charges.create({
       amount: 2000,
