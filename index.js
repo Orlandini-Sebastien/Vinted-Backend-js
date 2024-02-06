@@ -9,15 +9,17 @@ require('dotenv').config();
 const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGODB_URI);
 
-// For Vinted payment
+
+/*
 const corsOptions = {
-  "origin": "*",
+  "origin": "https://thriving-medovik-6bc46e.netlify.app/",
   "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
   "preflightContinue": false,
   "optionsSuccessStatus": 204
 }
 app.use(cors(corsOptions));
-
+*/
+app.use(cors());
 
 const userRoutes = require("./routes/user");
 app.use(userRoutes);
@@ -25,9 +27,11 @@ const offerRoutes = require("./routes/offer");
 app.use(offerRoutes);
 const offersRoutes = require("./routes/offers");
 app.use(offersRoutes);
+
+/*
 const paymentRoutes = require("./routes/payment");
 app.use(paymentRoutes);
-
+*/
 
 const deliverooRoutes = require("./routes/deliveroo");
 app.use(deliverooRoutes);
