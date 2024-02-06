@@ -10,15 +10,17 @@ const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGODB_URI);
 
 
-/*
+
 const corsOptions = {
   "origin": "https://thriving-medovik-6bc46e.netlify.app/",
   "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-  "preflightContinue": false,
-  "optionsSuccessStatus": 204
+  "preflightContinue": true,
+  "optionsSuccessStatus": 204,
+  "credentials" : true,
 }
+
 app.use(cors(corsOptions));
-*/
+
 app.use(cors());
 
 const userRoutes = require("./routes/user");
@@ -28,10 +30,10 @@ app.use(offerRoutes);
 const offersRoutes = require("./routes/offers");
 app.use(offersRoutes);
 
-/*
+
 const paymentRoutes = require("./routes/payment");
 app.use(paymentRoutes);
-*/
+
 
 const deliverooRoutes = require("./routes/deliveroo");
 app.use(deliverooRoutes);
