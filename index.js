@@ -10,15 +10,8 @@ const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGODB_URI);
 
 
-const corsOptions = {
-  "Access-Control-Allow-Origin": "*",
-  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-  "preflightContinue": true,
-  "optionsSuccessStatus": 204,
-  "credentials" : true,
-}
 
-app.use(cors(corsOptions));
+app.use(cors());
 
 
 
@@ -30,8 +23,11 @@ const offersRoutes = require("./routes/offers");
 app.use(offersRoutes);
 
 
+
 const paymentRoutes = require("./routes/payment");
 app.use(paymentRoutes);
+const payRoutes = require("./routes/pay")
+app.use(payRoutes);
 
 
 const deliverooRoutes = require("./routes/deliveroo");

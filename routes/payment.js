@@ -7,11 +7,8 @@ const isAuthenticated = require("../middlewars/isAuthenticated");
 
  
 
-router.post("/payment", isAuthenticated,  async (req, res) => {
-  res.header('Access-Control-Allow-Credentials', true);
-  res.header('Access-Control-Allow-Origin', "*");
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  res.header('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+router.post("/payment",   async (req, res) => {
+
     const stripeToken = req.body.stripeToken;
     const response = await stripe.charges.create({
       amount: 2000,

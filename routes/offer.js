@@ -111,10 +111,10 @@ router.delete("/offer/delete/:id", async(req,res)=>{
 
 router.get("/offer/:id", async(req,res)=>{
 
-  res.header('Access-Control-Allow-Credentials', true);
-  res.header('Access-Control-Allow-Origin', "*");
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-  res.header('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  //res.header('Access-Control-Allow-Credentials', true);
+  //res.header('Access-Control-Allow-Origin', "*");
+  //res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  //res.header('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
   try {
     const id = req.params.id;
     const product = await Offer.findById(id).populate("owner" , { account: 1 });;
